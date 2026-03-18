@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Satisfaction Survey</title>
+    <!-- SheetJS for Excel Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- QR Code Generator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --header-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --danger-gradient: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --hover-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            padding: 30px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: var(--header-gradient);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            opacity: 0.95;
+            font-size: 1.15em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tabs {
+            display: flex;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            border-bottom: none;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 4px;
+            background: var(--header-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .tab.active {
+            color: #1e3c72;
+            background: white;
+        }
+
+        .tab.active::after {
+            width: 80%;
+        }
+
+        .tab:hover:not(.active) {
+            color: #495057;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section {
+            margin-bottom: 35px;
+        }
+
+        .form-section h3 {
+            color: #1e3c72;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid;
+            border-image: var(--header-gradient) 1;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background: #f8fafc;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #a0aec0;
+        }
+
+        .rating-group {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .rating-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .rating-group label {
+            display: block;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 18px;
+            font-size: 1.05em;
+        }
+
+        .rating-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .rating-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border: 2px solid #cbd5e0;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            color: #4a5568;
+        }
+
+        .rating-option:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.1);
+        }
+
+        .rating-option.selected {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn {
+            padding: 16px 44px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-right: 12px;
+            margin-bottom: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--header-gradient);
+            color: white;
+            box-shadow: 0 6px 20px rgba(30, 60, 114, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(30, 60, 114, 0.45);
+        }
+
+        .btn-success {
+            background: var(--success-gradient);
+            color: white;
+            box-shadow: 0 6px 20px rgba(56, 239, 125, 0.35);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(56, 239, 125, 0.45);
+        }
+
+        .btn-danger {
+            background: var(--danger-gradient);
+            color: white;
+            box-shadow: 0 6px 20px rgba(235, 51, 73, 0.35);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(235, 51, 73, 0.45);
+        }
+
+        .button-group {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 2px solid #28a745;
+            animation: bounceIn 0.5s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-message h3 {
+            margin-bottom: 10px;
+            border: none;
+            padding: 0;
+            color: #155724;
+        }
+
+        .qr-section {
+            text-align: center;
+            padding: 35px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .qr-section h3 {
+            margin-bottom: 25px;
+            border: none;
+            padding: 0;
+        }
+
+        #qrcode {
+            display: inline-block;
+            padding: 25px;
+            background: white;
+            border-radius: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .qr-link {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            word-break: break-all;
+            margin-top: 20px;
+            font-size: 0.95em;
+            color: #4a5568;
+        }
+
+        .stats-section {
+            padding: 25px;
+        }
+
+        .stats-card {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .stats-card h2 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .stats-card p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .branch-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .branch-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .branch-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .branch-card h4 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .branch-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .branch-stat:last-child {
+            border-bottom: none;
+        }
+
+        .branch-stat span {
+            color: #718096;
+        }
+
+        .branch-stat strong {
+            color: #2d3748;
+            font-size: 1.1em;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 25px;
+        }
+
+        .table-container h3 {
+            margin-bottom: 20px;
+            border: none;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            font-size: 13px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: var(--header-gradient);
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f8fafc;
+        }
+
+        .required {
+            color: #eb3349;
+            font-weight: 700;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e8f4fd 0%, #d4ecf9 100%);
+            border-left: 5px solid #1e3c72;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 14px 14px 0;
+        }
+
+        .info-box strong {
+            color: #1e3c72;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.6em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .rating-option {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Customer Satisfaction Survey</h1>
+            <p>Your feedback helps us serve you better</p>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="survey">📝 Take Survey</div>
+            <div class="tab" data-tab="admin">🔧 Admin Panel</div>
+        </div>
+        
+        <div class="content">
+            <!-- Survey Tab -->
+            <div class="tab-content active" id="survey">
+                <div class="success-message" id="successMessage">
+                    <h3>✅ Thank You!</h3>
+                    <p>Your feedback has been submitted successfully.</p>
+                </div>
+                
+                <form id="surveyForm">
+                    <!-- Customer Information -->
+                    <div class="form-section">
+                        <h3>📋 Your Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" required placeholder="Enter your first name">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" required placeholder="Enter your last name">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" id="phone" placeholder="+90 5XX XXX XXXX">
+                            </div>
+                            <div class="form-group">
+                                <label>License Plate <span class="required">*</span></label>
+                                <input type="text" id="licensePlate" required placeholder="e.g., 01-A-001">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Branch & Department -->
+                    <div class="form-section">
+                        <h3>🏬 Service Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Select Branch <span class="required">*</span></label>
+                                <select id="branch" required>
+                                    <option value="">-- Select Branch --</option>
+                                    <option value="Lefkoşa">Lefkoşa</option>
+                                    <option value="Haspolat">Haspolat</option>
+                                    <option value="Girne">Girne</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Select Department <span class="required">*</span></label>
+                                <select id="department" required>
+                                    <option value="">-- Select Department --</option>
+                                    <option value="Maintenance – Mechanical – Electrical">Maintenance – Mechanical – Electrical</option>
+                                    <option value="Bodywork – Paint">Bodywork – Paint</option>
+                                    <option value="Appointment">Appointment</option>
+                                    <option value="Advisor">Advisor</option>
+                                    <option value="Workshop Repair">Workshop Repair</option>
+                                    <option value="Car Wash">Car Wash</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ratings -->
+                    <div class="form-section">
+                        <h3>⭐ Rate Your Experience (5 = Best, 1 = Poor)</h3>
+                        
+                        <div class="rating-group">
+                            <label>Overall Satisfaction <span class="required">*</span></label>
+                            <div class="rating-options" data-question="overallSatisfaction">
+                                <div class="rating-option" data-value="5">5</div>
+                                <div class="rating-option" data-value="4">4</div>
+                                <div class="rating-option" data-value="3">3</div>
+                                <div class="rating-option" data-value="2">2</div>
+                                <div class="rating-option" data-value="1">1</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-group">
+                            <label>Appointment</label>
+                            <div class="rating-options" data-question="appointment">
+                                <div class="rating-option" data-value="5">5</div>
+                                <div class="rating-option" data-value="4">4</div>
+                                <div class="rating-option" data-value="3">3</div>
+                                <div class="rating-option" data-value="2">2</div>
+                                <div class="rating-option" data-value="1">1</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-group">
+                            <label>Advisor</label>
+                            <div class="rating-options" data-question="advisor">
+                                <div class="rating-option" data-value="5">5</div>
+                                <div class="rating-option" data-value="4">4</div>
+                                <div class="rating-option" data-value="3">3</div>
+                                <div class="rating-option" data-value="2">2</div>
+                                <div class="rating-option" data-value="1">1</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-group">
+                            <label>Workshop Repair</label>
+                            <div class="rating-options" data-question="workshopRepair">
+                                <div class="rating-option" data-value="5">5</div>
+                                <div class="rating-option" data-value="4">4</div>
+                                <div class="rating-option" data-value="3">3</div>
+                                <div class="rating-option" data-value="2">2</div>
+                                <div class="rating-option" data-value="1">1</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-group">
+                            <label>Car Wash</label>
+                            <div class="rating-options" data-question="carWash">
+                                <div class="rating-option" data-value="5">5</div>
+                                <div class="rating-option" data-value="4">4</div>
+                                <div class="rating-option" data-value="3">3</div>
+                                <div class="rating-option" data-value="2">2</div>
+                                <div class="rating-option" data-value="1">1</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Comments -->
+                    <div class="form-section">
+                        <h3>💬 Additional Comments</h3>
+                        <div class="form-group">
+                            <textarea id="comments" rows="4" placeholder="Tell us more about your experience (optional)"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Submit Survey</button>
+                        <button type="reset" class="btn btn-danger">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Admin Tab -->
+            <div class="tab-content" id="admin">
+                <div class="info-box">
+                    <strong>📌 Admin Panel</strong><br>
+                    View survey responses, export to Excel, and see branch statistics.
+                </div>
+                
+                <div class="button-group" style="text-align: left;">
+                    <button class="btn btn-success" onclick="exportToExcel()">📊 Export to Excel</button>
+                    <button class="btn btn-danger" onclick="clearAllData()">🗑️ Clear All Data</button>
+                </div>
+                
+                <!-- Statistics -->
+                <div class="stats-section" id="statsSection">
+                    <div class="stats-card">
+                        <h2 id="totalResponses">0</h2>
+                        <p>Total Responses</p>
+                    </div>
+                    
+                    <h3 style="color: #1e3c72; margin: 20px 0;">Branch Breakdown</h3>
+                    <div class="branch-stats" id="branchStats">
+                        <!-- Branch statistics will be populated here -->
+                    </div>
+                </div>
+                
+                <!-- QR Code Section -->
+                <div class="qr-section">
+                    <h3 style="color: #1e3c72;">📱 Survey QR Code</h3>
+                    <div id="qrcode"></div>
+                    <div class="qr-link">
+                        <strong>Survey Link:</strong><br>
+                        <span id="surveyLink">Loading...</span>
+                    </div>
+                </div>
+                
+                <!-- Data Table -->
+                <div class="table-container">
+                    <h3 style="color: #1e3c72;">📋 All Responses</h3>
+                    <table id="responsesTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>License Plate</th>
+                                <th>Branch</th>
+                                <th>Department</th>
+                                <th>Overall</th>
+                                <th>Appointment</th>
+                                <th>Advisor</th>
+                                <th>Workshop</th>
+                                <th>Car Wash</th>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody id="responsesBody">
+                            <tr>
+                                <td colspan="12" style="text-align: center;">No responses yet</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Storage key
+        const STORAGE_KEY = 'customerSatisfactionSurvey';
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById(this.dataset.tab).classList.add('active');
+                    
+                    if (this.dataset.tab === 'admin') {
+                        loadAdminData();
+                    }
+                });
+            });
+            
+            // Rating selection
+            document.querySelectorAll('.rating-options').forEach(group => {
+                group.querySelectorAll('.rating-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        group.querySelectorAll('.rating-option').forEach(o => o.classList.remove('selected'));
+                        this.classList.add('selected');
+                    });
+                });
+            });
+            
+            // Form submission
+            document.getElementById('surveyForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitSurvey();
+            });
+            
+            // Generate QR Code
+            generateQRCode();
+            
+            // Set survey link
+            const surveyUrl = window.location.href;
+            document.getElementById('surveyLink').textContent = surveyUrl;
+        });
+        
+        // Get responses from storage
+        function getResponses() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        }
+        
+        // Save response to storage
+        function saveResponse(response) {
+            const responses = getResponses();
+            responses.push(response);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+        }
+        
+        // Submit survey
+        function submitSurvey() {
+            // Collect form data
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const licensePlate = document.getElementById('licensePlate').value.trim();
+            const branch = document.getElementById('branch').value;
+            const department = document.getElementById('department').value;
+            
+            // Get ratings
+            const getRating = (question) => {
+                const group = document.querySelector(`[data-question="${question}"]`);
+                const selected = group.querySelector('.rating-option.selected');
+                return selected ? parseInt(selected.dataset.value) : '';
+            };
+            
+            const response = {
+                id: Date.now(),
+                date: new Date().toISOString(),
+                firstName,
+                lastName,
+                phone,
+                licensePlate,
+                branch,
+                department,
+                overallSatisfaction: getRating('overallSatisfaction'),
+                appointment: getRating('appointment'),
+                advisor: getRating('advisor'),
+                workshopRepair: getRating('workshopRepair'),
+                carWash: getRating('carWash'),
+                comments: document.getElementById('comments').value.trim()
+            };
+            
+            // Validate required fields
+            if (!response.firstName || !response.lastName || !response.licensePlate || 
+                !response.branch || !response.department || !response.overallSatisfaction) {
+                alert('Please fill in all required fields marked with *');
+                return;
+            }
+            
+            // Save response
+            saveResponse(response);
+            
+            // Show success message
+            document.getElementById('successMessage').classList.add('show');
+            
+            // Reset form
+            document.getElementById('surveyForm').reset();
+            document.querySelectorAll('.rating-option.selected').forEach(o => o.classList.remove('selected'));
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+        }
+        
+        // Load admin data
+        function loadAdminData() {
+            const responses = getResponses();
+            
+            // Update total
+            document.getElementById('totalResponses').textContent = responses.length;
+            
+            // Branch statistics
+            const branchStats = {};
+            const branches = ['Lefkoşa', 'Haspolat', 'Girne'];
+            
+            branches.forEach(branch => {
+                branchStats[branch] = {
+                    count: 0,
+                    totalRating: 0,
+                    avgRating: 0
+                };
+            });
+            
+            responses.forEach(r => {
+                if (branchStats[r.branch]) {
+                    branchStats[r.branch].count++;
+                    if (r.overallSatisfaction) {
+                        branchStats[r.branch].totalRating += r.overallSatisfaction;
+                    }
+                }
+            });
+            
+            branches.forEach(branch => {
+                if (branchStats[branch].count > 0) {
+                    branchStats[branch].avgRating = (branchStats[branch].totalRating / branchStats[branch].count).toFixed(1);
+                }
+            });
+            
+            // Render branch stats
+            let branchHtml = '';
+            branches.forEach(branch => {
+                branchHtml += `
+                    <div class="branch-card">
+                        <h4>${branch}</h4>
+                        <div class="branch-stat">
+                            <span>Responses:</span>
+                            <strong>${branchStats[branch].count}</strong>
+                        </div>
+                        <div class="branch-stat">
+                            <span>Avg. Rating:</span>
+                            <strong>${branchStats[branch].avgRating || '-'}</strong>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('branchStats').innerHTML = branchHtml;
+            
+            // Render table
+            const tbody = document.getElementById('responsesBody');
+            if (responses.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="12" style="text-align: center;">No responses yet</td></tr>';
+            } else {
+                tbody.innerHTML = responses.map(r => `
+                    <tr>
+                        <td>${new Date(r.date).toLocaleDateString()}</td>
+                        <td>${r.firstName} ${r.lastName}</td>
+                        <td>${r.phone || '-'}</td>
+                        <td>${r.licensePlate}</td>
+                        <td>${r.branch}</td>
+                        <td>${r.department}</td>
+                        <td>${r.overallSatisfaction || '-'}</td>
+                        <td>${r.appointment || '-'}</td>
+                        <td>${r.advisor || '-'}</td>
+                        <td>${r.workshopRepair || '-'}</td>
+                        <td>${r.carWash || '-'}</td>
+                        <td>${r.comments || '-'}</td>
+                    </tr>
+                `).join('');
+            }
+        }
+        
+        // Export to Excel
+        function exportToExcel() {
+            const responses = getResponses();
+            
+            if (responses.length === 0) {
+                alert('No data to export!');
+                return;
+            }
+            
+            // Prepare data for Excel
+            const data = responses.map(r => ({
+                'Date': new Date(r.date).toLocaleDateString(),
+                'First Name': r.firstName,
+                'Last Name': r.lastName,
+                'Phone': r.phone || '',
+                'License Plate': r.licensePlate,
+                'Branch': r.branch,
+                'Department': r.department,
+                'Overall Satisfaction': r.overallSatisfaction || '',
+                'Appointment': r.appointment || '',
+                'Advisor': r.advisor || '',
+                'Workshop Repair': r.workshopRepair || '',
+                'Car Wash': r.carWash || '',
+                'Comments': r.comments || ''
+            }));
+            
+            // Create workbook
+            const ws = XLSX.utils.json_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Survey Responses');
+            
+            // Generate branch summary sheet
+            const branches = ['Lefkoşa', 'Haspolat', 'Girne'];
+            const branchSummary = branches.map(branch => {
+                const branchResponses = responses.filter(r => r.branch === branch);
+                const avgOverall = branchResponses.length > 0 
+                    ? (branchResponses.reduce((sum, r) => sum + (r.overallSatisfaction || 0), 0) / branchResponses.length).toFixed(2)
+                    : 0;
+                return {
+                    'Branch': branch,
+                    'Total Responses': branchResponses.length,
+                    'Avg Overall Satisfaction': avgOverall
+                };
+            });
+            
+            const ws2 = XLSX.utils.json_to_sheet(branchSummary);
+            XLSX.utils.book_append_sheet(wb, ws2, 'Branch Summary');
+            
+            // Download file
+            const fileName = `Customer_Survey_${new Date().toISOString().split('T')[0]}.xlsx`;
+            XLSX.writeFile(wb, fileName);
+        }
+        
+        // Clear all data
+        function clearAllData() {
+            if (confirm('Are you sure you want to delete all survey responses? This cannot be undone.')) {
+                localStorage.removeItem(STORAGE_KEY);
+                loadAdminData();
+                alert('All data has been cleared.');
+            }
+        }
+        
+        // Generate QR Code
+        function generateQRCode() {
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+            
+            const surveyUrl = window.location.href;
+            
+            new QRCode(qrContainer, {
+                text: surveyUrl,
+                width: 180,
+                height: 180,
+                colorDark: '#1e3c72',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+    </script>
+</body>
+</html>
