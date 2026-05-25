@@ -1,1 +1,15 @@
 node_modules
+
+# Environment files (never commit secrets)
+.env
+.env.local
+.env.*.local
+server/.env
+server/.env.*
+
+# SQLite leftover (if any)
+*.db
+survey.db
+
+# Build output (will be uploaded separately)
+build/

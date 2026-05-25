@@ -7,6 +7,7 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 30090;
@@ -149,6 +150,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
+
+// Serve React build folder (static assets: js, css, images)
+app.use(express.static(path.join(__dirname, 'build')));
 
 // API Routes
 
@@ -535,7 +539,11 @@ app.post('/api/logout', (req, res) => {
   res.json({ message: 'Logged out successfully' });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// Start server (Passenger compatible for cPanel Application Manager)
+if (typeof PhusionPassenger !== 'undefined') {
+  module.exports = app;   // Passenger handles the server
+} else {
+  app.listen(PORT, () => {
+    console.log(`Server running`);
+  });
+}

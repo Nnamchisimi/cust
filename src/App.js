@@ -64,6 +64,8 @@ const translations = {
     // Form - Page 2
     rateExperience: 'Rate Your Experience',
     ratingHint: '5 = Excellent | 3 = Average | 1 = Poor',
+    surveyIntro: 'We kindly ask you to evaluate your most recent visit to our service by rating each question below on a scale of 1 to 5, by selecting the corresponding star. A rating of 5 represents the highest, 3 represents average and 1 represents the lowest. Thank you for choosing Kombos Automotive for your satisfaction and valuable feedback. Kombos Automotive After-Sales Services Directorate',
+    ratingGuide: '1 = Not Satisfied | 2 = Fair | 3 = Average | 4 = Good | 5 = Excellent',
     overallSatisfaction: 'General Satisfaction',
     appointment: 'Appointment',
     advisor: 'Advisor',
@@ -132,6 +134,8 @@ const translations = {
     // Form - Page 2
     rateExperience: 'Deneyiminizi Puanlayın',
     ratingHint: '5 = Mükemmel | 3 = Orta | 1 = Kötü',
+    surveyIntro: 'Hizmetimize en son yaptığınız ziyareti aşağıdaki soruları 1 ila 5 arasında puanlayarak değerlendirmenizi saygıyla rica ederiz. 5 en yüksek puanı, 3 ortalama puanı ve 1 en düşük puanı temsil eder. Memnuniyetiniz ve değerli geri bildirimleriniz için Kombos Otomotİv\'i seçtiğiniz için teşekkür ederiz. Kombos Otomotİv Satış Sonrası Hizmetler Müdürlüğü',
+    ratingGuide: '1 = Memnun Değil | 2 = Kötü | 3 = Orta | 4 = İyi | 5 = Mükemmel',
     overallSatisfaction: 'Genel Memnuniyet',
     appointment: 'Randevu',
     advisor: 'Danışman',
@@ -235,16 +239,40 @@ const exportToExcel = () => {
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Survey Responses');
   
-  const branches = ['Lefkoşa', 'Haspolat-Innovation', 'Girne'];
+  const branches = ['Lefkoşa', 'Haspolat', 'Girne'];
   const branchSummary = branches.map(branch => {
     const branchResponses = responses.filter(r => r.branch === branch);
     const avgOverall = branchResponses.length > 0 
       ? (branchResponses.reduce((sum, r) => sum + (r.overallSatisfaction || 0), 0) / branchResponses.length).toFixed(2)
       : 0;
+    const avgMaintenance = branchResponses.length > 0 
+      ? (branchResponses.reduce((sum, r) => sum + (r.maintenance || 0), 0) / branchResponses.filter(r => r.maintenance).length || 1).toFixed(2)
+      : 0;
+    const avgBodywork = branchResponses.length > 0 
+      ? (branchResponses.reduce((sum, r) => sum + (r.bodywork || 0), 0) / branchResponses.filter(r => r.bodywork).length || 1).toFixed(2)
+      : 0;
+    const avgAppointment = branchResponses.length > 0 
+      ? (branchResponses.reduce((sum, r) => sum + (r.appointment || 0), 0) / branchResponses.filter(r => r.appointment).length || 1).toFixed(2)
+      : 0;
+    const avgAdvisor = branchResponses.length > 0 
+      ? (branchResponses.reduce((sum, r) => sum + (r.advisor || 0), 0) / branchResponses.filter(r => r.advisor).length || 1).toFixed(2)
+      : 0;
+    const avgWorkshopRepair = branchResponses.length > 0 
+      ? (branchResponses.reduce((sum, r) => sum + (r.workshopRepair || 0), 0) / branchResponses.filter(r => r.workshopRepair).length || 1).toFixed(2)
+      : 0;
+    const avgCarWash = branchResponses.length > 0 
+      ? (branchResponses.reduce((sum, r) => sum + (r.carWash || 0), 0) / branchResponses.filter(r => r.carWash).length || 1).toFixed(2)
+      : 0;
     return {
       'Branch': branch,
       'Total Responses': branchResponses.length,
-      'Avg Overall Satisfaction': avgOverall
+      'Avg Overall Satisfaction': avgOverall,
+      'Avg Maintenance': branch === 'Haspolat' ? avgMaintenance : 'N/A',
+      'Avg Bodywork': branch === 'Haspolat' ? avgBodywork : 'N/A',
+      'Avg Appointment': avgAppointment,
+      'Avg Advisor': avgAdvisor,
+      'Avg Workshop Repair': avgWorkshopRepair,
+      'Avg Car Wash': avgCarWash
     };
   });
   
@@ -262,17 +290,19 @@ const RatingGroup = ({ label, value, onSelect }) => {
       <span style={styles.ratingLabel}>{label}</span>
       <div style={styles.logoRatingContainer}>
         {[1, 2, 3, 4, 5].map((num) => (
-          <button
-            key={num}
-            style={{
-              ...styles.logoRatingButton,
-              ...(value && value >= num ? styles.logoRatingButtonSelected : {})
-            }}
-            onClick={() => onSelect(value === num ? null : num)}
-            type="button"
-          >
-            <MercedesStar size={36} color={value && value >= num ? PRIMARY_WHITE : PRIMARY_BLACK} />
-          </button>
+          <div key={num} style={styles.ratingButtonWrapper}>
+            <button
+              style={{
+                ...styles.logoRatingButton,
+                ...(value && value >= num ? styles.logoRatingButtonSelected : {})
+              }}
+              onClick={() => onSelect(value === num ? null : num)}
+              type="button"
+            >
+              <MercedesStar size={36} color={value && value >= num ? PRIMARY_WHITE : PRIMARY_BLACK} />
+            </button>
+            <span style={styles.ratingNumber}>{num}</span>
+          </div>
         ))}
       </div>
     </div>
@@ -485,6 +515,8 @@ const RatingForm = ({ formData, setFormData, onBack, onSubmit, t }) => {
 
       <h2 style={styles.sectionTitle}>{t.rateExperience}</h2>
       
+      <p style={styles.surveyIntro}>{t.surveyIntro}</p>
+      <p style={styles.ratingGuide}>{t.ratingGuide}</p>
       
       <RatingGroup 
         label={t.overallSatisfaction + ' *'} 
@@ -769,8 +801,8 @@ const AdminPanel = ({ responses, onRefresh, isMobile = false, t, user, onLogout 
   );
 };
 
-// API Base URL
-const API_URL = 'http://localhost:30090';
+// API Base URL - uses build-time env var for production deployment
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:30090';
 
 // Main App Component
 function App() {
@@ -1634,6 +1666,38 @@ const styles = {
     marginBottom: 24,
     marginTop: -12,
     textAlign: 'center',
+  },
+  surveyIntro: {
+    color: TEXT_DARK,
+    fontSize: 14,
+    lineHeight: 1.6,
+    marginBottom: 16,
+    padding: '12px 16px',
+    backgroundColor: LIGHT_GREY,
+    borderRadius: 8,
+    textAlign: 'center',
+  },
+  ratingGuide: {
+    color: TEXT_LIGHT,
+    fontSize: 13,
+    fontWeight: '500',
+    marginBottom: 24,
+    textAlign: 'center',
+    padding: '8px 12px',
+    backgroundColor: PRIMARY_WHITE,
+    borderRadius: 6,
+    border: '1px dashed ' + BORDER_COLOR,
+  },
+  ratingButtonWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 8,
+  },
+  ratingNumber: {
+    color: TEXT_DARK,
+    fontSize: 14,
+    fontWeight: '600',
   },
   ratingOptions: {
     flexDirection: 'row',

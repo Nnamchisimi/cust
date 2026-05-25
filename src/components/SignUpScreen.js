@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Box, Link, CircularProgress } from '@mui/material';
 
-const API_URL = 'http://localhost:30090';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:30090';
 
 const SignUpScreen = ({ onSwitchToLogin, t }) => {
   const [username, setUsername] = useState('');
