@@ -1,0 +1,33 @@
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Serve existing files/directories directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # API routes
+  RewriteRule ^api/auth\.php/(login|signup|verify-email|resend-code|verify|logout)$ api/auth.php/$1 [L,QSA]
+  RewriteRule ^api/survey\.php/(responses|stats|export)$ api/survey.php/$1 [L,QSA]
+
+  # Frontend pages
+  RewriteRule ^admin/?$ admin.php [L,QSA]
+
+  # Default to index.php
+  RewriteRule ^ index.php [L]
+</IfModule>
+
+# Security
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Prevent access to sensitive files
+<FilesMatch "(db\.php|config\.php)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
