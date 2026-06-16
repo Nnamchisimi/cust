@@ -2,8 +2,8 @@
 -- Run this in MySQL Workbench
 
 -- Create database
-CREATE DATABASE IF NOT EXISTS customer_survey;
-USE customer_survey;
+CREATE DATABASE IF NOT EXISTS simi_customer_survey;
+USE simi_customer_survey;
 
 -- Create survey_responses table
 CREATE TABLE IF NOT EXISTS survey_responses (
@@ -43,10 +43,12 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Insert default admin user (already verified for existing admin)
--- Note: In production, use bcrypt or similar for password hashing
-INSERT INTO users (username, email, password, role, verified) VALUES 
-('contactflowair@gmail.com', 'contactflowair@gmail.com', 'ab', 'admin', TRUE)
-ON DUPLICATE KEY UPDATE username=username;
+-- Password is hashed with bcrypt via PHP's password_hash('ab', PASSWORD_DEFAULT)
+-- Run the PHP initDatabase() function to auto-create this user with proper hashing
+-- Or manually insert with: SELECT password_hash('ab', PASSWORD_DEFAULT) and paste the result below
+-- INSERT INTO users (username, email, password, role, verified) VALUES
+-- ('contactflowair@gmail.com', 'contactflowair@gmail.com', '<bcrypt_hash_here>', 'admin', TRUE)
+-- ON DUPLICATE KEY UPDATE username=username;
 
 -- Optional: Create index for faster queries
 CREATE INDEX idx_branch ON survey_responses(branch);

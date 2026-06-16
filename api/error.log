@@ -1,0 +1,280 @@
+[10-Jun-2026 08:58:32 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:58:42 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:58:46 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:58:47 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\survey.php(12): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:59:16 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:59:24 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:59:25 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\survey.php(12): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:59:32 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:59:33 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:59:37 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:59:40 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:59:45 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 08:59:45 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\survey.php(12): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 10:01:26 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 10:01:28 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 10:35:08 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 10:45:18 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\survey.php(12): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 10:45:49 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 10:53:38 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 10:53:38 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 10:53:39 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 10:53:39 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\survey.php(12): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 11:11:48 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 11:11:48 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 11:11:51 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 11:11:51 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\survey.php(12): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 11:11:58 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 11:11:59 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 11:12:00 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 11:12:00 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\survey.php(12): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 12:38:36 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 13:03:02 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 13:03:03 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 13:03:07 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\auth.php(6): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
+[10-Jun-2026 13:03:07 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'simi_simi'@'localhost' (using password: YES) in C:\Users\User\Documents\cust\api\db.php:10
+Stack trace:
+#0 C:\Users\User\Documents\cust\api\db.php(10): mysqli->__construct('localhost', 'simi_simi', Object(SensitiveParameterValue), 'simi_customer_s...', 3306)
+#1 C:\Users\User\Documents\cust\api\db.php(22): getDB()
+#2 C:\Users\User\Documents\cust\api\db.php(61): initDatabase()
+#3 C:\Users\User\Documents\cust\api\survey.php(12): require_once('C:\\Users\\User\\D...')
+#4 {main}
+  thrown in C:\Users\User\Documents\cust\api\db.php on line 10
